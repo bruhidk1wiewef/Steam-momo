@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>for steam momo 🥟</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;900&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --peach: #ffb997;
+    --blush: #ff8fab;
+    --lilac: #c9b8f5;
+    --mint: #a8e6cf;
+    --cream: #fff8f0;
+    --dark: #2d1b3d;
+    --yellow: #ffe066;
+    --sky: #a2d8f4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* custom cursor */
+  .cursor {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--blush);
+    position: fixed; pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width .15s, height .15s, background .2s;
+    mix-blend-mode: multiply;
+  }
+  .cursor-trail {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--lilac);
+    position: fixed; pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: left .08s ease, top .08s ease;
+    mix-blend-mode: multiply;
+  }
+
+  /* floating blobs background */
+  .blob-bg {
+    position: fixed; inset: 0; z-index: -1; overflow: hidden;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    animation: blobFloat 8s ease-in-out infinite;
+  }
+  .blob1 { width: 420px; height: 420px; background: var(--blush); top: -100px; left: -100px; animation-delay: 0s; }
+  .blob2 { width: 350px; height: 350px; background: var(--lilac); top: 30%; right: -80px; animation-delay: 2s; }
+  .blob3 { width: 280px; height: 280px; background: var(--mint); bottom: 10%; left: 20%; animation-delay: 4s; }
+  .blob4 { width: 200px; height: 200px; background: var(--yellow); bottom: 20%; right: 25%; animation-delay: 1s; }
+  .blob5 { width: 180px; height: 180px; background: var(--sky); top: 55%; left: -50px; animation-delay: 3s; }
+
+  @keyframes blobFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.06); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+  }
+
+  .momo-icon {
+    font-size: 90px;
+    display: block;
+    animation: momoSpin 3s ease-in-out infinite;
+    filter: drop-shadow(0 8px 24px rgba(255,143,171,.45));
+    margin-bottom: 10px;
+  }
+  @keyframes momoSpin {
+    0%, 100% { transform: rotate(-8deg) scale(1); }
+    50% { transform: rotate(8deg) scale(1.12); }
+  }
+
+  .hero-tag {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--blush);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    opacity: 0;
+    animation: fadeUp .7s .2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--blush), var(--lilac), var(--peach));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    animation: fadeUp .7s .4s forwards;
+    text-shadow: none;
+  }
+
+  .hero-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 1.7rem;
+    color: #8a6a9a;
+    margin-top: 12px;
+    opacity: 0;
+    animation: fadeUp .7s .6s forwards;
+  }
+
+  .hero-names {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 24px;
+    opacity: 0;
+    animation: fadeUp .7s .8s forwards;
+  }
+
+  .name-chip {
+    background: white;
+    border: 2.5px solid var(--blush);
+    border-radius: 999px;
+    padding: 8px 20px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: var(--blush);
+    box-shadow: 0 4px 12px rgba(255,143,171,.2);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .name-chip:hover {
+    transform: translateY(-4px) scale(1.07);
+    box-shadow: 0 8px 24px rgba(255,143,171,.35);
+    background: var(--blush);
+    color: white;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 32px;
+    font-size: 2.2rem;
+    animation: bounce 1.4s ease-in-out infinite;
+    opacity: 0.5;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 80px 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: var(--blush);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--dark);
+    margin-bottom: 32px;
+    line-height: 1.2;
+  }
+
+  /* ── OUR STORY TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--blush), var(--lilac), var(--mint));
+    border-radius: 3px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    background: white;
+    border-radius: 20px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    transition: transform .3s, box-shadow .3s;
+  }
+  .timeline-item:hover {
+    transform: translateX(8px);
+    box-shadow: 0 8px 30px rgba(201,184,245,.3);
+  }
+  .timeline-item::before {
+    content: attr(data-emoji);
+    position: absolute;
+    left: -42px;
+    top: 20px;
+    font-size: 1.5rem;
+    background: white;
+    border-radius: 50%;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  }
+
+  .timeline-item h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    color: var(--blush);
+    margin-bottom: 6px;
+  }
+  .timeline-item p {
+    font-size: 1rem;
+    color: #6b5b7b;
+    line-height: 1.6;
+  }
+
+  /* ── REASONS GRID ── */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .reason-card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    transition: transform .3s, box-shadow .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .reason-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blush), var(--lilac));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s;
+  }
+  .reason-card:hover::after { transform: scaleX(1); }
+  .reason-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(201,184,245,.3);
+  }
+
+  .reason-emoji { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+  .reason-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .reason-card p {
+    font-size: 0.93rem;
+    color: #8a6a9a;
+    line-height: 1.6;
+  }
+
+  /* ── NICKNAMES ── */
+  .nicknames-section {
+    text-align: center;
+  }
+
+  .nicknames-cloud {
+    display: flex; flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .nick {
+    font-family: 'Fredoka One', cursive;
+    border-radius: 16px;
+    padding: 14px 26px;
+    font-size: 1.25rem;
+    cursor: default;
+    transition: transform .25s, box-shadow .25s;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+    animation: nickPop .4s ease both;
+  }
+  .nick:hover {
+    transform: rotate(-3deg) scale(1.1);
+  }
+  .nick:nth-child(odd):hover { transform: rotate(3deg) scale(1.1); }
+
+  .nick1 { background: #ffd6e0; color: #c94f6b; }
+  .nick2 { background: #e0d6ff; color: #6b4fc9; }
+  .nick3 { background: #d6f0ff; color: #2d88c4; }
+  .nick4 { background: #d6ffe8; color: #2d9c5a; }
+  .nick5 { background: #fff0d6; color: #c48a2d; }
+  .nick6 { background: #fde8ff; color: #a02dc4; }
+
+  @keyframes nickPop {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* ── SNAP / THINGS SECTION ── */
+  .things-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+  }
+
+  .thing-card {
+    background: white;
+    border-radius: 20px;
+    padding: 22px 18px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    transition: transform .25s;
+  }
+  .thing-card:hover { transform: scale(1.05) rotate(-1deg); }
+  .thing-card .big { font-size: 3rem; display: block; margin-bottom: 8px; }
+  .thing-card p { font-size: 0.92rem; color: #7a5b8a; line-height: 1.5; }
+
+  /* ── MESSAGE SECTION ── */
+  .message-box {
+    background: white;
+    border-radius: 32px;
+    padding: 48px 40px;
+    box-shadow: 0 8px 40px rgba(201,184,245,.25);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .message-box::before {
+    content: '🥟';
+    position: absolute;
+    font-size: 180px;
+    opacity: 0.05;
+    top: -20px; right: -20px;
+    pointer-events: none;
+  }
+
+  .message-box p {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: #6b5b7b;
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto 24px;
+  }
+
+  .message-box .sig {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--blush), var(--lilac));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── FLOATING HEARTS ── */
+  .hearts-container {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  .floating-heart {
+    position: absolute;
+    font-size: 1.4rem;
+    animation: floatUp 4s ease-in forwards;
+    pointer-events: none;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100vh) scale(0.5) rotate(20deg); opacity: 0; }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: #b09ab8;
+  }
+  footer span { color: var(--blush); }
+
+  /* ── SECTION REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* divider */
+  .divider {
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 10px;
+    color: #ddd;
+    padding: 10px 0;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+<div class="hearts-container" id="heartsContainer"></div>
+
+<!-- floating blob bg -->
+<div class="blob-bg">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <div class="blob blob5"></div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <span class="momo-icon">🥟</span>
+  <p class="hero-tag">a whole website just for you</p>
+  <h1 class="hero-title">Steam Momo</h1>
+  <p class="hero-sub">my favourite person on the internet (and life tbh)</p>
+  <div class="hero-names">
+    <span class="name-chip">bhonduuu 🐣</span>
+    <span class="name-chip">bachaaaa 🍼</span>
+    <span class="name-chip">steam momo 🥟</span>
+  </div>
+  <span class="scroll-hint">↓</span>
+</div>
+
+<!-- ── OUR STORY ── -->
+<section class="reveal">
+  <p class="section-label">chapter one</p>
+  <h2 class="section-title">how did we even end up here 🤔</h2>
+  <div class="timeline">
+
+    <div class="timeline-item" data-emoji="🌐">
+      <h3>random online meeting</h3>
+      <p>two strangers on the internet. nobody planned it. nobody expected it. it just happened — the way all the best things do.</p>
+    </div>
+
+    <div class="timeline-item" data-emoji="💬">
+      <h3>just talking... and talking... and talking</h3>
+      <p>what started as a random convo somehow never stopped. turns out we were both interesting enough to keep the other around.</p>
+    </div>
+
+    <div class="timeline-item" data-emoji="🤝">
+      <h3>okay we're friends now</h3>
+      <p>it became official the moment neither of us wanted to stop talking. no formal announcement, it just quietly became real.</p>
+    </div>
+
+    <div class="timeline-item" data-emoji="🥟">
+      <h3>steam momo era begins</h3>
+      <p>somewhere along the way she got the name steam momo. perfect, soft, warm, a little silly — basically her in food form.</p>
+    </div>
+
+    <div class="timeline-item" data-emoji="💜">
+      <h3>best friends</h3>
+      <p>and now here we are. she calls me bhonduuu and bachaaaa. sends unhinged snaps. comfortable, chaotic, wholesome. the real deal.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider reveal">✦ ✦ ✦</div>
+
+<!-- ── NICKNAMES ── -->
+<section class="nicknames-section reveal">
+  <p class="section-label">things she calls me</p>
+  <h2 class="section-title">the nickname collection 🏷️</h2>
+  <div class="nicknames-cloud">
+    <span class="nick nick1" style="animation-delay:.05s">bhonduuu 🐣</span>
+    <span class="nick nick2" style="animation-delay:.1s">bachaaaa 🍼</span>
+    <span class="nick nick3" style="animation-delay:.15s">bhooooondu 😤</span>
+    <span class="nick nick4" style="animation-delay:.2s">whatever cute name she invents next 🔮</span>
+    <span class="nick nick5" style="animation-delay:.25s">idiot (affectionately) 💛</span>
+    <span class="nick nick6" style="animation-delay:.3s">steam momo's person 🥟</span>
+  </div>
+  <p style="margin-top:28px; font-family:'Caveat',cursive; font-size:1.4rem; color:#a080b0;">
+    every new nickname means she's more comfortable. <br>and that means everything. 🥺
+  </p>
+</section>
+
+<div class="divider reveal">✦ ✦ ✦</div>
+
+<!-- ── REASONS ── -->
+<section class="reveal">
+  <p class="section-label">the honest list</p>
+  <h2 class="section-title">why steam momo is built different 🌟</h2>
+  <div class="reasons-grid">
+
+    <div class="reason-card">
+      <span class="reason-emoji">📸</span>
+      <h3>the snap energy</h3>
+      <p>sends the most unhinged, random, hilarious snaps. when someone's comfortable enough to snap you their weird moments — that's real.</p>
+    </div>
+
+    <div class="reason-card">
+      <span class="reason-emoji">🏷️</span>
+      <h3>nickname inventor</h3>
+      <p>didn't just use your name. made up something cuter. bhonduuu? bachaaaa? nobody does this unless they actually like you.</p>
+    </div>
+
+    <div class="reason-card">
+      <span class="reason-emoji">🌐</span>
+      <h3>internet origin story</h3>
+      <p>met online, could've stayed strangers. chose to stick around. sometimes the internet actually works out.</p>
+    </div>
+
+    <div class="reason-card">
+      <span class="reason-emoji">💬</span>
+      <h3>never boring</h3>
+      <p>the conversations never run dry. something to say about everything, and somehow always worth listening to.</p>
+    </div>
+
+    <div class="reason-card">
+      <span class="reason-emoji">🥟</span>
+      <h3>steam momo energy</h3>
+      <p>warm, soft, a tiny bit silly, full of good stuff on the inside. this is literally just her personality described as food.</p>
+    </div>
+
+    <div class="reason-card">
+      <span class="reason-emoji">💜</span>
+      <h3>first female best friend</h3>
+      <p>not just any friend — a different kind of friendship that showed up and proved itself without any drama or conditions.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider reveal">✦ ✦ ✦</div>
+
+<!-- ── OUR THINGS ── -->
+<section class="reveal">
+  <p class="section-label">our whole thing</p>
+  <h2 class="section-title">stuff that is just... us 🎭</h2>
+  <div class="things-row">
+
+    <div class="thing-card">
+      <span class="big">📲</span>
+      <p>random texts at random hours that somehow always hit different</p>
+    </div>
+    <div class="thing-card">
+      <span class="big">😂</span>
+      <p>finding the same things funny — the stupid, unhinged, chaotic things</p>
+    </div>
+    <div class="thing-card">
+      <span class="big">🎯</span>
+      <p>being weirdly honest with each other without it getting weird</p>
+    </div>
+    <div class="thing-card">
+      <span class="big">🥟</span>
+      <p>the steam momo name that somehow perfectly describes one of us</p>
+    </div>
+    <div class="thing-card">
+      <span class="big">🐣</span>
+      <p>bhonduuu. that name lives rent free and that's final.</p>
+    </div>
+    <div class="thing-card">
+      <span class="big">✨</span>
+      <p>internet friendship that became realer than most real-life ones</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider reveal">✦ ✦ ✦</div>
+
+<!-- ── MESSAGE ── -->
+<section class="reveal" style="max-width:780px">
+  <p class="section-label">from me to you</p>
+  <h2 class="section-title">the actual message 💌</h2>
+  <div class="message-box">
+    <p>
+      hey steam momo 🥟<br><br>
+      i made you a whole website. a WHOLE website. you better feel special.<br><br>
+      i don't usually do this kind of thing but honestly — you showed up in my life in the most random way possible and now i can't imagine not having you around.<br><br>
+      you call me bhonduuu and bachaaaa and send me the most chaotic snaps and i genuinely love it. it means you're comfortable. it means this is real. and that matters more than you know.<br><br>
+      you were my first close female friend and you didn't even make it awkward — you just... made it easy. and fun. and a little unhinged. which is exactly how it should be.<br><br>
+      so yeah. here's your website, steam momo. hope it made you smile at least once. 🥟💜
+    </p>
+    <p class="sig">— bhonduuu, your personal website developer apparently 😭</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  made with <span>💜</span> for steam momo 🥟 &nbsp;·&nbsp; because she deserves a whole website &nbsp;·&nbsp; no cap
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  let tx = 0, ty = 0;
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    setTimeout(() => {
+      trail.style.left = e.clientX + 'px';
+      trail.style.top  = e.clientY + 'px';
+    }, 70);
+  });
+  document.addEventListener('mousedown', () => {
+    cursor.style.width = '14px';
+    cursor.style.height = '14px';
+  });
+  document.addEventListener('mouseup', () => {
+    cursor.style.width = '22px';
+    cursor.style.height = '22px';
+  });
+
+  // Floating hearts on click
+  const emojis = ['💜','🥟','✨','🌸','💕','🐣','💫','🎀'];
+  const heartsContainer = document.getElementById('heartsContainer');
+  document.addEventListener('click', e => {
+    for(let i = 0; i < 4; i++) {
+      const h = document.createElement('span');
+      h.classList.add('floating-heart');
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left = (e.clientX + (Math.random()-0.5)*60) + 'px';
+      h.style.top  = e.clientY + 'px';
+      h.style.animationDelay = (Math.random()*0.3) + 's';
+      h.style.fontSize = (.8 + Math.random()*.9) + 'rem';
+      heartsContainer.appendChild(h);
+      setTimeout(() => h.remove(), 4200);
+    }
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
